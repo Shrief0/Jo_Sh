@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عربة التسوق - Sh & Jo</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #ffc0cb;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4b004f;
+      text-decoration: none;
+    }
+    .description {
+      font-size: 14px;
+      color: #6e005f;
+    }
+    .lang-switcher select {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #999;
+      font-size: 14px;
+    }
+    .container {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .form-group {
+      margin: 10px 0;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+    .btn {
+      background-color: #b19cd9;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 10px auto;
+    }
+    .total {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 10px;
+    }
+    .remove-btn {
+      background: #ff6666;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #receiptPreview {
+      max-width: 100%;
+      margin-top: 10px;
+      display: none;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #ffe4ec;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #663399;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo"><a href="index.html">Sh & Jo</a></div>
+      <div class="description" id="siteDesc">💍💄ACCESSORIES&Brand</div>
+    </div>
+    <div class="lang-switcher">
+      <select onchange="switchLanguage(this.value)">
+        <option value="ar">🇪🇬 عربي</option>
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </header>  <div class="container">
+    <div id="cartItems"></div>
+    <div class="total">الإجمالي: <span id="totalPrice">0</span> ج.م</div><div class="form-group">
+  <label for="fullname">الاسم بالكامل</label>
+  <input type="text" id="fullname" />
+</div>
+<div class="form-group">
+  <label for="phone">رقم الهاتف</label>
+  <input type="text" id="phone" />
+</div>
+<div class="form-group">
+  <label for="address">العنوان</label>
+  <input type="text" id="address" />
+</div>
+<div class="form-group">
+  <label for="location">موقعك الجغرافي</label>
+  <input type="text" id="location" readonly />
+  <button class="btn" onclick="getLocation()">📍 تحديد موقعي</button>
+</div>
+<div class="form-group">
+  <label for="paymentMethod">اختر طريقة الدفع</label>
+  <select id="paymentMethod">
+    <option value="">-- اختر --</option>
+    <option value="فيزا">💳 فيزا</option>
+    <option value="انستا باي">🏦 انستا باي</option>
+    <option value="فودافون كاش">📱 فودافون كاش</option>
+    <option value="أورانج كاش">🟠 أورانج كاش</option>
+    <option value="اتصالات كاش">🟢 اتصالات كاش</option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="paidAmount">💵 المبلغ المدفوع (بالجنيه)</label>
+  <input type="number" id="paidAmount" />
+</div>
+<div class="form-group">
+  <label for="senderLast4">🔢 آخر 4 أرقام من رقم المحوّل</label>
+  <input type="text" id="senderLast4" maxlength="4" />
+</div>
+<div class="form-group">
+  <label for="receipt">🧾 صورة إيصال الدفع (إجباري)</label>
+  <input type="file" id="receipt" accept="image/*" />
+  <img id="receiptPreview" />
+</div>
+<div class="form-group">
+  <strong>💰 قم بتحويل المبلغ على رقم فودافون كاش التالي:</strong><br>
+  <strong style="font-size: 18px; color: #b10024;">201080554138</strong>
+</div>
+<button class="btn" onclick="confirmOrder()">✅ تأكيد الطلب</button>
+
+  </div>  <div class="footer" id="customerService">
+    خدمة العملاء:<br>
+    <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+    واتساب: <a href="https://wa.me/201080554138">201080554138</a>
+  </div>  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          document.getElementById("location").value = `https://maps.google.com/?q=${lat},${lon}`;
+        }, error => {
+          alert("حدث خطأ في تحديد الموقع: " + error.message);
+        });
+      } else {
+        alert("المتصفح لا يدعم تحديد الموقع الجغرافي.");
+      }
+    }
+
+    document.getElementById("receipt").addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const preview = document.getElementById("receiptPreview");
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function confirmOrder() {
+      const name = document.getElementById("fullname").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const location = document.getElementById("location").value;
+      const payment = document.getElementById("paymentMethod").value;
+      const paid = document.getElementById("paidAmount").value;
+      const last4 = document.getElementById("senderLast4").value;
+      const receipt = document.getElementById("receipt").files[0];
+      const total = document.getElementById("totalPrice").textContent;
+
+      if (!name || !phone || !address || !location || !payment || !paid || !last4 || !receipt) {
+        alert("يرجى إدخال جميع البيانات المطلوبة بما في ذلك صورة إيصال الدفع.");
+        return;
+      }
+
+      let message = `طلب جديد:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📍 العنوان: ${address}\n🌐 الموقع: ${location}\n💰 الإجمالي: ${total} ج.م\n💳 الدفع: ${payment}\n💵 المدفوع: ${paid} ج.م\n🔢 آخر 4 أرقام: ${last4}`;
+
+      window.open(`https://wa.me/201080554138?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function switchLanguage(lang) {
+      localStorage.setItem("siteLanguage", lang);
+      applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+      const body = document.body;
+      if (lang === "en") {
+        body.setAttribute("dir", "ltr");
+        body.setAttribute("lang", "en");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES & Brand";
+        document.getElementById("customerService").innerHTML = `Customer Support:<br><a href='mailto:jojoshopsuppor@gmail.com'>jojoshopsuppor@gmail.com</a><br>WhatsApp: <a href='https://wa.me/201080554138'>201080554138</a>`;
+      } else {
+        body.setAttribute("dir", "rtl");
+        body.setAttribute("lang", "ar");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES&Brand";
+        document.getElementById("customerService").innerHTML = `خدمة العملاء:<br><a href='mailto:jojoshopsuppor@gmail.com'>jojoshopsuppor@gmail.com</a><br>واتساب: <a href='https://wa.me/201080554138'>201080554138</a>`;
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedLang = localStorage.getItem("siteLanguage") || "ar";
+      document.querySelector(".lang-switcher select").value = savedLang;
+      applyLanguage(savedLang);
+    });
+  </script></body>
+</html>
