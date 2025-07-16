@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تسجيل الدخول - Sh & Jo</title>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth-compat.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #ffc0cb;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4b004f;
+      text-decoration: none;
+    }
+    .description {
+      font-size: 14px;
+      color: #6e005f;
+    }
+    .lang-switcher select {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #999;
+      font-size: 14px;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .login-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #663399;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #b19cd9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .login-box a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #663399;
+      text-decoration: none;
+    }
+    .alert {
+      text-align: center;
+      background-color: #ffdddd;
+      color: #a00;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+    }
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #ffe4ec;
+      font-size: 14px;
+      border-top: 1px solid #e5a0b0;
+    }
+    .footer a {
+      color: #663399;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo"><a href="index.html">Sh & Jo</a></div>
+      <div class="description" id="siteDesc">💍💄ACCESSORIES&Brand</div>
+    </div>
+    <div class="lang-switcher">
+      <select onchange="switchLanguage(this.value)">
+        <option value="ar">🇪🇬 عربي</option>
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </header>  <div class="container">
+    <div class="login-box">
+      <h2 id="loginTitle">تسجيل الدخول</h2>
+      <div id="alertBox" class="alert" style="display:none;">يجب تسجيل الدخول أولًا لتأكيد الطلب</div>
+      <input type="email" id="email" placeholder="البريد الإلكتروني">
+      <input type="password" id="password" placeholder="كلمة المرور">
+      <button onclick="loginUser()" id="loginBtn">تسجيل الدخول</button>
+      <a href="register.html" id="registerLink">إنشاء حساب جديد</a>
+    </div>
+  </div>  <div class="footer" id="customerService">
+    خدمة العملاء:<br>
+    <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+    واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+  </div>  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmLlBbnKNNCA53x3SeLnCI7e3A89CxHao",
+      authDomain: "jojo-shop-4d843.firebaseapp.com",
+      projectId: "jojo-shop-4d843",
+      storageBucket: "jojo-shop-4d843.firebasestorage.app",
+      messagingSenderId: "763306332375",
+      appId: "1:763306332375:web:732db30b0234d0906a2092",
+      measurementId: "G-E73QP19185"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get('from');
+
+    if (from === 'cart') {
+      document.getElementById("alertBox").style.display = "block";
+    }
+
+    function loginUser() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          if (from === 'cart') {
+            window.location.href = 'cart.html';
+          } else {
+            window.location.href = 'index.html';
+          }
+        })
+        .catch((error) => {
+          alert("خطأ في تسجيل الدخول: " + error.message);
+        });
+    }
+
+    function switchLanguage(lang) {
+      const body = document.body;
+      if (lang === "en") {
+        body.setAttribute("dir", "ltr");
+        body.setAttribute("lang", "en");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES & Brand";
+        document.getElementById("loginTitle").textContent = "Login";
+        document.getElementById("email").placeholder = "Email";
+        document.getElementById("password").placeholder = "Password";
+        document.getElementById("loginBtn").textContent = "Login";
+        document.getElementById("registerLink").textContent = "Create New Account";
+        if (from === 'cart') {
+          document.getElementById("alertBox").textContent = "You must log in first to complete the order";
+        }
+        document.getElementById("customerService").innerHTML = `
+          Customer Support:<br>
+          <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+          WhatsApp: <a href="https://wa.me/20115087664">20115087664</a>
+        `;
+      } else {
+        body.setAttribute("dir", "rtl");
+        body.setAttribute("lang", "ar");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES&Brand";
+        document.getElementById("loginTitle").textContent = "تسجيل الدخول";
+        document.getElementById("email").placeholder = "البريد الإلكتروني";
+        document.getElementById("password").placeholder = "كلمة المرور";
+        document.getElementById("loginBtn").textContent = "تسجيل الدخول";
+        document.getElementById("registerLink").textContent = "إنشاء حساب جديد";
+        if (from === 'cart') {
+          document.getElementById("alertBox").textContent = "يجب تسجيل الدخول أولًا لتأكيد الطلب";
+        }
+        document.getElementById("customerService").innerHTML = `
+          خدمة العملاء:<br>
+          <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+          واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+        `;
+      }
+    }
+  </script></body>
+</html>
