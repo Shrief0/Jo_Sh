@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sh & Jo</title>
+
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- خط جميل (اختياري) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Cairo', 'Arial', sans-serif;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      animation: fadeInBody 1s ease-in;
+      transition: direction 0.5s ease;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      background-color: #ffc0cb;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e5a0b0;
+      animation: slideDown 0.8s ease-in-out;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4b004f;
+      text-decoration: none;
+    }
+
+    .logo a:hover {
+      text-decoration: underline;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #6e005f;
+      margin-top: 5px;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-right a {
+      color: #4b004f;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .header-right a:hover {
+      color: #6e005f;
+    }
+
+    .lang-switcher select {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #999;
+    }
+
+    nav {
+      background-color: #fff;
+      padding: 15px 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      border-bottom: 2px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #663399;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background-color: #b19cd9;
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #9f5f9f;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .search-box {
+      margin: 25px auto;
+      text-align: center;
+    }
+
+    .search-box input {
+      width: 70%;
+      padding: 10px;
+      border: 2px solid #b19cd9;
+      border-radius: 10px;
+      font-size: 15px;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .customer-service {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      background-color: #ffe4ec;
+      border-top: 1px solid #e5a0b0;
+    }
+
+    .customer-service a {
+      color: #663399;
+      text-decoration: none;
+    }
+
+    .customer-service a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+
+<body dir="rtl" lang="ar">
+
+  <!-- ✅ الهيدر بعد التعديلات -->
+  <header>
+    <!-- اللوجو والعنوان -->
+    <div class="logo-container">
+      <img src="logo.png" alt="JOJO Accessories">
+      <div>
+        <div class="logo">
+          <a href="index.html" id="siteName">Sh & Jo</a>
+        </div>
+        <div class="description" id="siteDesc">💍💄ACCESSORIES & Brand</div>
+      </div>
+    </div>
+
+    <!-- تسجيل الدخول - السلة - اللغة -->
+    <div class="header-right">
+      <a href="login.html" title="تسجيل الدخول">
+        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+      </a>
+      <a href="cart.html" title="عربة التسوق">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)">
+          <option value="ar">🇪🇬 عربي</option>
+          <option value="en">🇺🇸 English</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ✅ الأقسام -->
+  <nav>
+    <a href="accessories.html" id="navAccessories">💍 متجر الإكسسوارات</a>
+    <a href="makeup.html" id="navMakeup">متجر المكياج 💄💅🏻</a>
+    <a href="clothes.html" id="navClothes">ملابس 👗🛍️</a>
+  </nav>
+
+  <!-- ✅ مربع البحث -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+  </div>
+
+  <!-- ✅ خدمة العملاء -->
+  <div class="customer-service" id="customerService">
+    خدمة العملاء: <br>
+    <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+    واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+  </div>
+
+  <!-- ✅ سويتش اللغة -->
+  <script>
+    function switchLanguage(lang) {
+      const body = document.body;
+      if (lang === "en") {
+        body.setAttribute("dir", "ltr");
+        body.setAttribute("lang", "en");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES & Brand";
+        document.getElementById("navAccessories").textContent = "💍 Accessories Shop";
+        document.getElementById("navMakeup").textContent = "Makeup Shop 💄💅🏻";
+        document.getElementById("navClothes").textContent = "Clothes 👗🛍️";
+        document.getElementById("searchInput").placeholder = "Search for a product...";
+        document.getElementById("customerService").innerHTML = `
+          Customer Support: <br>
+          <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+          WhatsApp: <a href="https://wa.me/20115087664">20115087664</a>
+        `;
+      } else {
+        body.setAttribute("dir", "rtl");
+        body.setAttribute("lang", "ar");
+        document.getElementById("siteDesc").textContent = "💍💄ACCESSORIES&Brand";
+        document.getElementById("navAccessories").textContent = "💍 متجر الإكسسوارات";
+        document.getElementById("navMakeup").textContent = "متجر المكياج 💄💅🏻";
+        document.getElementById("navClothes").textContent = "ملابس 👗🛍️";
+        document.getElementById("searchInput").placeholder = "ابحث عن منتج...";
+        document.getElementById("customerService").innerHTML = `
+          خدمة العملاء: <br>
+          <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a><br>
+          واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>

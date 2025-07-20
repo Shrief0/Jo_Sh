@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>متجر المكياج - Luminé</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fffafc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #ffb6c1;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #fca3b7;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: #880e4f;
+      text-decoration: none;
+    }
+    .right-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .cart-btn {
+      position: relative;
+      font-size: 20px;
+      color: #880e4f;
+      text-decoration: none;
+    }
+    .cart-btn i {
+      font-size: 24px;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+    nav {
+      background-color: #fff;
+      padding: 15px 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      border-bottom: 2px solid #eee;
+    }
+    nav a {
+      text-decoration: none;
+      color: #c2185b;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      color: #ad1457;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: #fff;
+      border: 2px solid #ffb6c1;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .product h3 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #880e4f;
+    }
+    .product p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .product button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .product button:hover {
+      background-color: #c2185b;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #ffe4ec;
+      font-size: 14px;
+      border-top: 1px solid #e5a0b0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="index.html">Luminé</a></div>
+  <div class="right-header">
+    <a class="cart-btn" href="cart.html">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+    <select onchange="switchLanguage(this.value)">
+      <option value="ar">🇪🇬 عربي</option>
+      <option value="en">🇺🇸 English</option>
+    </select>
+  </div>
+</header>
+
+<nav>
+  <a href="accessories.html">💍 متجر الإكسسوارات</a>
+  <a href="makeup.html">متجر المكياج 💄💅🏻</a>
+  <a href="clothes.html">ملابس 👗🛍️</a>
+</nav>
+
+<section class="products" id="productsList">
+  <!-- المنتجات القديمة -->
+  <div class="product">
+    <img src="images/lipstick1.jpg" alt="روج أحمر">
+    <h3>روج أحمر كلاسيكي</h3>
+    <button onclick="addToCart('روج أحمر كلاسيكي')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/foundation1.jpg" alt="فاونديشن مات">
+    <h3>فاونديشن مات يدوم طويلاً</h3>
+    <button onclick="addToCart('فاونديشن مات')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/eyeliner1.jpg" alt="آيلاينر ضد الماء">
+    <h3>آيلاينر ضد الماء</h3>
+    <button onclick="addToCart('آيلاينر ضد الماء')">إضافة إلى العربة</button>
+  </div>
+
+  <!-- المنتجات الجديدة -->
+  <div class="product">
+    <img src="images/61FKUyfMZ1L.webp" alt="Maybelline Color Sensational Lipstick">
+    <h3>Maybelline Color Sensational Lipstick</h3>
+    <p>روج كلاسيكي غني باللون يدوم طويلاً، تركيبة مرطّبة ومناسبة لكل ألوان البشرة.</p>
+    <button onclick="addToCart('Maybelline Color Sensational Lipstick')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/61mIlsN5PmL.webp" alt="L.A. Girl PRO.Matte Foundation">
+    <h3>PRO.Matte Foundation من L.A. Girl</h3>
+    <p>كريم أساس بلمسة نهائية مطفية شبه مخملية، بتغطية متوسطة–كاملة، غني بفيتامين E وB5.</p>
+    <button onclick="addToCart('PRO.Matte Foundation')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/61PCgylI8nL.webp" alt="Wet n Wild Silk Finish Lipstick">
+    <h3>Wet n Wild Silk Finish Lipstick</h3>
+    <p>لون شفاه حريري غني وقابل للبناء، يحتوي على فيتامين A وE وزيت الماكاديميا للترطيب.</p>
+    <button onclick="addToCart('Wet n Wild Silk Finish Lipstick')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/71zjO6-X_JL.webp" alt="Make Up For Ever Rouge Artist Lipstick">
+    <h3>Make Up For Ever Rouge Artist Lipstick</h3>
+    <p>روج عالي الأداء بتغطية كاملة، تركيبته مقاومة للتلطّخ، ثابت وناعم.</p>
+    <button onclick="addToCart('Make Up For Ever Rouge Artist Lipstick')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/61P1wH04sGL.webp" alt="Clinique Almost Lipstick Black Honey">
+    <h3>Clinique Almost Lipstick – Black Honey</h3>
+    <p>روج تدرّج لوني شفاف، يبرز لون الشفاه الطبيعي ويمنح مظهرًا ناعمًا ورطبًا.</p>
+    <button onclick="addToCart('Clinique Almost Lipstick Black Honey')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/61VoYqy_OLL.webp" alt="Bobbi Brown Luxe Matte Lip Color Boss Pink">
+    <h3>Bobbi Brown Luxe Matte Lip Color – Boss Pink</h3>
+    <p>لون وردي فاتح بتأثير مطفي فاخر، ثابت وذو تغطية قوية ولمسة أنيقة.</p>
+    <button onclick="addToCart('Bobbi Brown Luxe Matte Lip Color Boss Pink')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/51eZSvG-rdL.webp" alt="MAC Bombshell Frost Lipstick">
+    <h3>MAC Bombshell Frost Lipstick</h3>
+    <p>روج لامع بلون وردي شفاف بلمسة فريزت، تركيبة كلاسيكية غنية.</p>
+    <button onclick="addToCart('MAC Bombshell Frost Lipstick')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/51C2mnDQonL.webp" alt="L.A. Girl PRO.Matte Foundation Alternate">
+    <h3>PRO.Matte Foundation – L.A. Girl (Shade 2)</h3>
+    <p>دُرج آخر من نفس كريم الأساس، بتغطية شبه مطفية ومقاومة للمعان، غني بفيتامينات للبشرة.</p>
+    <button onclick="addToCart('PRO.Matte Foundation Shade 2')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/51Tz8kGuAJL.webp" alt="Maybelline Color Sensational Lipstick Shake">
+    <h3>Maybelline Color Sensational – Shake</h3>
+    <p>روج يشبه عصير الفاكهة، ملمس ناعم ومرطّب، بلمسة قاتمة ولمسة لامعة خفيفة.</p>
+    <button onclick="addToCart('Maybelline Color Sensational Shake')">إضافة إلى العربة</button>
+  </div>
+  <div class="product">
+    <img src="images/512IruSS9BL.webp" alt="MAC Satin Lipstick">
+    <h3>MAC Satin Lipstick Classic</h3>
+    <p>روج بتركيبة نصف مطفية، غنية باللون وثابتة، توازن بين اللمعان والتغطية.</p>
+    <button onclick="addToCart('MAC Satin Lipstick Classic')">إضافة إلى العربة</button>
+  </div>
+</section>
+
+<footer>
+  خدمة العملاء: <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a> -
+  واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+</footer>
+
+<script>
+  function addToCart(productName) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name: productName, quantity: 1 });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(`تمت إضافة "${productName}" إلى العربة ✅`);
+  }
+
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cartCount").innerText = cart.length;
+  }
+
+  function switchLanguage(lang) {
+    if (lang === "en") {
+      document.title = "Makeup Shop - Luminé";
+      document.querySelectorAll("nav a")[0].textContent = "💍 Accessories Shop";
+      document.querySelectorAll("nav a")[1].textContent = "Makeup Shop 💄💅🏻";
+      document.querySelectorAll("nav a")[2].textContent = "Clothes 👗🛍️";
+    } else {
+      document.title = "متجر المكياج - Luminé";
+      document.querySelectorAll("nav a")[0].textContent = "💍 متجر الإكسسوارات";
+      document.querySelectorAll("nav a")[1].textContent = "متجر المكياج 💄💅🏻";
+      document.querySelectorAll("nav a")[2].textContent = "ملابس 👗🛍️";
+    }
+  }
+
+  updateCartCount(); // تحديث العدد أول ما الصفحة تفتح
+</script>
+
+</body>
+</html>

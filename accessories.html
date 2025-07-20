@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>متجر الإكسسوارات - Luminé</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffc0cb;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e5a0b0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4b004f;
+      text-decoration: none;
+    }
+
+    .right-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cart-btn {
+      position: relative;
+      font-size: 20px;
+      color: #4b004f;
+      text-decoration: none;
+    }
+
+    .cart-btn i {
+      font-size: 24px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+
+    nav {
+      background-color: #fff;
+      padding: 15px 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      border-bottom: 2px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #663399;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #9f5f9f;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      background: #fff;
+      border: 2px solid #ffc0cb;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product h3 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #4b004f;
+    }
+
+    .product button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background-color: #e055a0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #ffe4ec;
+      font-size: 14px;
+      border-top: 1px solid #e5a0b0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><a href="index.html">Luminé</a></div>
+    <div class="right-header">
+      <a class="cart-btn" href="cart.html">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <select onchange="switchLanguage(this.value)">
+        <option value="ar">🇪🇬 عربي</option>
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </header>
+
+  <nav>
+    <a href="accessories.html">💍 متجر الإكسسوارات</a>
+    <a href="makeup.html">متجر المكياج 💄💅🏻</a>
+    <a href="clothes.html">ملابس 👗🛍️</a>
+  </nav>
+
+  <section class="products" id="productsList">
+    <div class="product">
+      <img src="images/bracelet1.jpg" alt="سوار ذهبي">
+      <h3>سوار ذهبي فاخر</h3>
+      <button onclick="addToCart('سوار ذهبي فاخر')">إضافة إلى العربة</button>
+    </div>
+    <div class="product">
+      <img src="images/necklace1.jpg" alt="عقد لؤلؤ">
+      <h3>عقد لؤلؤ أنيق</h3>
+      <button onclick="addToCart('عقد لؤلؤ أنيق')">إضافة إلى العربة</button>
+    </div>
+    <div class="product">
+      <img src="images/ring1.jpg" alt="خاتم">
+      <h3>خاتم فضة عصري</h3>
+      <button onclick="addToCart('خاتم فضة عصري')">إضافة إلى العربة</button>
+    </div>
+  </section>
+
+  <footer>
+    خدمة العملاء: <a href="mailto:jojoshopsuppor@gmail.com">jojoshopsuppor@gmail.com</a> -
+    واتساب: <a href="https://wa.me/20115087664">20115087664</a>
+  </footer>
+
+  <script>
+    function addToCart(productName) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: productName, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(`تمت إضافة "${productName}" إلى العربة ✅`);
+    }
+
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      document.getElementById("cartCount").innerText = cart.length;
+    }
+
+    function switchLanguage(lang) {
+      if (lang === "en") {
+        document.title = "Accessories Shop - Luminé";
+        document.querySelectorAll("nav a")[0].textContent = "💍 Accessories Shop";
+        document.querySelectorAll("nav a")[1].textContent = "Makeup Shop 💄💅🏻";
+        document.querySelectorAll("nav a")[2].textContent = "Clothes 👗🛍️";
+      } else {
+        document.title = "متجر الإكسسوارات - Luminé";
+        document.querySelectorAll("nav a")[0].textContent = "💍 متجر الإكسسوارات";
+        document.querySelectorAll("nav a")[1].textContent = "متجر المكياج 💄💅🏻";
+        document.querySelectorAll("nav a")[2].textContent = "ملابس 👗🛍️";
+      }
+    }
+
+    updateCartCount(); // لتحديث العدد عند تحميل الصفحة
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luminé - عربة التسوق</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #ffe6f0;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.lang-switch {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.cart-items {
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.payment-note {
+  background: #fff0f5;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+button {
+  background-color: #e91e63;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+  </style>
+</head><body>
+  <header>
+    <h1>Luminé</h1>
+    <h2>💍💄ACCESSORIES & Brand</h2>
+  </header>  <div class="lang-switch">
+    🇪🆬 عربي | 🇺🇸 English
+  </div>  <div class="cart-items" id="cartItems"></div>  <h3>الإجمالي: <span id="totalPrice">0</span> ج.م</h3>  <div class="form-group">
+    <label>الاسم بالكامل</label>
+    <input type="text" placeholder="ادخل اسمك" />
+  </div>
+  <div class="form-group">
+    <label>رقم الهاتف</label>
+    <input type="tel" placeholder="ادخل رقمك" />
+  </div>
+  <div class="form-group">
+    <label>العنوان</label>
+    <textarea rows="2" placeholder="ادخل العنوان بالتفصيل"></textarea>
+  </div>
+  <div class="form-group">
+    <label>موقعك الجغرافي</label>
+    <button onclick="getLocation()">📍 تحديد موقعي</button>
+  </div>
+  <div class="form-group">
+    <label>اختر طريقة الدفع</label>
+    <select>
+      <option>-- اختر --</option>
+      <option>💳 فيزا</option>
+      <option>🏦 انستا باي</option>
+      <option>📱 فودافون كاش</option>
+      <option>🔘 أورانج كاش</option>
+      <option>🔷 اتصالات كاش</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>💵 المبلغ المدفوع (بالجنيه)</label>
+    <input type="number" placeholder="ادخل المبلغ" />
+  </div>
+  <div class="form-group">
+    <label>🔢 آخر 4 أرقام من رقم المحوّل</label>
+    <input type="text" maxlength="4" placeholder="مثال: 1234" />
+  </div>
+  <div class="form-group">
+    <label>🧾 صورة إيصال الدفع (إجباري)</label>
+    <input type="file" accept="image/*" />
+  </div>
+  <div class="payment-note">
+    ⭐⭐ قم بتحويل المبلغ على رقم فودافون كاش التالي: <br />
+    <strong>201080554138</strong>
+  </div>
+  <button>✅ تأكيد الطلب</button>  <footer>
+    خدمة العملاء: jojoshopsuppor@gmail.com | واتساب: <a href="https://wa.me/201150877664">201150877664</a>
+  </footer>  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartContainer = document.getElementById("cartItems");
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += parseFloat(item.price);
+      cartContainer.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.price} ج.م</p>
+            <button onclick="removeFromCart(${index})">❌ إزالة</button>
+          </div>
+        </div>
+      `;
+    });
+
+    document.getElementById("totalPrice").textContent = total.toFixed(2);
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    }
+
+    function getLocation() {
+      navigator.geolocation.getCurrentPosition(position => {
+        alert("تم تحديد موقعك: " + position.coords.latitude + ", " + position.coords.longitude);
+      }, () => {
+        alert("حدث خطأ أثناء تحديد الموقع");
+      });
+    }
+  </script></body></html>
