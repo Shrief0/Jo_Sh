@@ -3,19 +3,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>متجر المكياج - Luminé</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #fff0f5;
       margin: 0;
       padding: 0;
+      background-color: #fff0f5;
     }
     header {
       background-color: #c2185b;
       color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+      font-size: 18px;
     }
     .products {
       display: grid;
@@ -24,37 +36,38 @@
       padding: 20px;
     }
     .product {
-      background-color: white;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       padding: 15px;
       text-align: center;
     }
     .product img {
-      width: 100%;
+      max-width: 100%;
       height: 250px;
       object-fit: cover;
       border-radius: 8px;
     }
     .product h3 {
-      font-size: 18px;
-      margin: 10px 0;
+      margin: 10px 0 5px;
+      color: #c2185b;
     }
     .product p {
+      margin: 5px 0;
       font-size: 16px;
-      color: #555;
     }
-    .product button {
-      padding: 10px;
-      background-color: #e91e63;
-      border: none;
+    .add-to-cart {
+      background-color: #c2185b;
       color: white;
-      font-weight: bold;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
       border-radius: 5px;
       cursor: pointer;
     }
-    .product button:disabled {
-      background-color: gray;
+    .add-to-cart:disabled {
+      background-color: #ccc;
       cursor: not-allowed;
     }
     footer {
@@ -63,53 +76,64 @@
       text-align: center;
       font-size: 16px;
     }
+    footer h3 {
+      color:#c2185b;
+      margin-bottom: 10px;
+    }
+    footer a {
+      color:#e91e63;
+      text-decoration:none;
+    }
   </style>
 </head>
 <body>
   <header>
-    💄 متجر المكياج - Luminé
-  </header>
-  <section class="products">
+    <h1>Luminé</h1>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="cart.html">🛒 عربة التسوق</a>
+    </nav>
+  </header>  <section class="products">
     <div class="product">
-      <img src="قلم تحديد شفاه .jpg" alt="قلم تحديد">
+      <img src="قلم تحديد شفاه .jpg" alt="قلم تحديد الشفاه">
       <h3>استرا قلم تحديد الشفاه من سليب بوفر، ميدنايت SN.004</h3>
       <p>السعر: 450 جنيه</p>
-      <button>إضافة إلى العربة</button>
+      <button class="add-to-cart" data-name="قلم تحديد الشفاه" data-price="450" data-image="قلم تحديد شفاه .jpg">إضافة إلى العربة</button>
     </div>
     <div class="product">
       <img src="IMG-20250721-WA0005.jpg" alt="ماسكارا">
       <h3>ماسكارا انستالينجث، أسود 0001، من استرا</h3>
       <p>السعر: 285 جنيه</p>
-      <button>إضافة إلى العربة</button>
+      <button class="add-to-cart" data-name="ماسكارا" data-price="285" data-image="IMG-20250721-WA0005.jpg">إضافة إلى العربة</button>
     </div>
     <div class="product">
       <img src="IMG-20250721-WA0007.jpg" alt="سوفت مات">
       <h3>سوفت مات 02 باتر، من استرا</h3>
       <p>السعر: 620 جنيه</p>
-      <button>إضافة إلى العربة</button>
+      <button class="add-to-cart" data-name="سوفت مات" data-price="620" data-image="IMG-20250721-WA0007.jpg">إضافة إلى العربة</button>
     </div>
     <div class="product">
       <img src="IMG-20250721-WA0009.jpg" alt="أحمر شفاه">
       <h3>أحمر شفاه سائل انفاييبل لو مات ريزيستانس يدوم حتى 16 ساعة، 240 رود من لوريال باريس</h3>
       <p>السعر: 530 جنيه</p>
-      <button>إضافة إلى العربة</button>
+      <button class="add-to-cart" data-name="أحمر شفاه" data-price="530" data-image="IMG-20250721-WA0009.jpg">إضافة إلى العربة</button>
     </div>
     <div class="product">
       <img src="IMG-20250721-WA0004.jpg" alt="كونسيلر">
       <h3>كونسيلر يدوم طويلا من استرا، 4.5 مل</h3>
       <p>غير متوفر</p>
-      <button disabled>غير متاح</button>
+      <button class="add-to-cart" disabled>غير متوفر</button>
     </div>
     <div class="product">
-      <img src="IMG-20250721-WA0003.jpg" alt="كونتور">
+      <img src="IMG-20250721-WA0003.jpg" alt="كونتور وهايلايتر">
       <h3>كونتور وهايلايتر رومانس من استرا - 02 بينك رومانس</h3>
       <p>السعر: 950 جنيه</p>
-      <button>إضافة إلى العربة</button>
+      <button class="add-to-cart" data-name="كونتور وهايلايتر" data-price="950" data-image="IMG-20250721-WA0003.jpg">إضافة إلى العربة</button>
     </div>
   </section>  <footer>
-    <h3 style="color:#c2185b; margin-bottom: 10px;">خدمة العملاء</h3>
+    <h3>خدمة العملاء</h3>
     <p>📞 للتواصل معنا: <strong>01150877664</strong></p>
-    <p>📬 عبر واتساب: <a href="https://wa.me/201150877664" style="color:#e91e63; text-decoration:none;">اضغط هنا للمحادثة</a></p>
+    <p>📬 أو عبر واتساب: <a href="https://wa.me/201150877664">اضغط هنا للمحادثة</a></p>
     <p>🕐 مواعيد العمل: من 10 صباحًا حتى 10 مساءً</p>
   </footer>
 </body>
