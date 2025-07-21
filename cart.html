@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-  <meta charset="UTF-8">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luminé - عربة التسوق</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -10,12 +9,11 @@
       margin: 0;
       padding: 20px;
       color: #333;
-    }header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.lang-switch {
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }.lang-switch {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -88,9 +86,11 @@ footer {
   <header>
     <h1>Luminé</h1>
     <h2>💍💄ACCESSORIES & Brand</h2>
-  </header>  <div class="lang-switch">
-    🇪🆬 عربي | 🇺🇸 English
-  </div>  <div class="cart-items" id="cartItems"></div>  <h3>الإجمالي: <span id="totalPrice">0</span> ج.م</h3>  <div class="form-group">
+  </header>
+  <div class="lang-switch">
+    🇪🇬 عربي | 🇺🇸 English
+  </div>  <div class="cart-items" id="cartItems"></div>
+  <h3>الإجمالي: <span id="totalPrice">0</span> ج.م</h3>  <div class="form-group">
     <label>الاسم بالكامل</label>
     <input type="text" placeholder="ادخل اسمك" />
   </div>
@@ -122,7 +122,7 @@ footer {
     <input type="number" placeholder="ادخل المبلغ" />
   </div>
   <div class="form-group">
-    <label>🔢 آخر 4 أرقام من رقم المحوّل</label>
+    <label>🧒 آخر 4 أرقام من رقم المحوّل</label>
     <input type="text" maxlength="4" placeholder="مثال: 1234" />
   </div>
   <div class="form-group">
@@ -164,9 +164,9 @@ footer {
 
     function getLocation() {
       navigator.geolocation.getCurrentPosition(position => {
-        alert("تم تحديد موقعك: " + position.coords.latitude + ", " + position.coords.longitude);
+        alert("\u062a\u0645 \u062a\u062d\u062f\u064a\u062f \u0645\u0648\u0642\u0639\u0643: " + position.coords.latitude + ", " + position.coords.longitude);
       }, () => {
-        alert("حدث خطأ أثناء تحديد الموقع");
+        alert("\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u062a\u062d\u062f\u064a\u062f \u0627\u0644\u0645\u0648\u0642\u0639");
       });
     }
   </script></body></html>
